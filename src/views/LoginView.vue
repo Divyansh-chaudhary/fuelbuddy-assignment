@@ -6,6 +6,19 @@ import { ref } from "vue";
 import useStore from "@/stores/store";
 import { useRouter } from "vue-router";
 
+const props = withDefaults(
+  defineProps<{
+    showForgotPasswordLink?: boolean;
+    rememberLogin?: boolean;
+    showSignup?: boolean;
+  }>(),
+  {
+    showForgotPasswordLink: false,
+    rememberLogin: false,
+    showSignup: true,
+  }
+);
+
 const loginData = ref({ email: "divyansh@yopmail.com", password: "Test@123" });
 
 const loading = ref(false);
@@ -51,5 +64,8 @@ const onLogin = async () => {
     :data="loginData"
     @submit="onLogin"
     :loading="loading"
+    :showForgotPasswordLink="props.showForgotPasswordLink"
+    :rememberLogin="rememberLogin"
+    :showSignup="showSignup"
   />
 </template>

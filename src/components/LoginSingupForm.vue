@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{
+  showForgotPasswordLink?: boolean;
+  showSignup?: boolean;
+  rememberLogin?: boolean;
   loading?: boolean;
   type: "register" | "login";
   data: {
@@ -63,6 +66,32 @@ const redirectLink = isLogin ? "/signup" : "/login";
                   required
                 />
               </div>
+              <div
+                v-if="showForgotPasswordLink || rememberLogin"
+                class="flex items-center justify-between"
+              >
+                <div v-if="rememberLogin" class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input
+                      id="remember"
+                      aria-describedby="remember"
+                      type="checkbox"
+                      class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm text-right">
+                    <label for="remember" class="text-gray-500">
+                      Remember me
+                    </label>
+                  </div>
+                </div>
+                <a
+                  v-if="showForgotPasswordLink"
+                  href="#"
+                  class="text-sm font-medium text-primary-600 hover:underline"
+                  >Forgot password?</a
+                >
+              </div>
               <button
                 type="submit"
                 class="bg-slate-950 w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -70,7 +99,10 @@ const redirectLink = isLogin ? "/signup" : "/login";
               >
                 {{ loading ? "Loading..." : isLogin ? "Sign in" : "Sign up" }}
               </button>
-              <p class="text-sm font-light text-gray-500">
+              <p
+                v-if="isLogin ? showSignup : true"
+                class="text-sm font-light text-gray-500"
+              >
                 {{
                   isLogin
                     ? "Don’t have an account yet? "

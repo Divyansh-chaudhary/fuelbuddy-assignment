@@ -1,6 +1,12 @@
-// import { withThemeByClassName } from "@storybook/addon-styling";
-import type { Preview } from "@storybook/vue3";
 import "../src/assets/main.css";
+import { createPinia } from "pinia";
+import { type Preview, setup } from "@storybook/vue3";
+import { type App } from "vue";
+
+const pinia = createPinia();
+setup((app: App) => {
+  app.use(pinia);
+});
 
 const preview: Preview = {
   parameters: {
@@ -15,13 +21,3 @@ const preview: Preview = {
 };
 
 export default preview;
-
-// export const decorators = [
-//   withThemeByClassName({
-//     themes: {
-//       light: "",
-//       dark: "dark",
-//     },
-//     defaultTheme: "light",
-//   }),
-// ];

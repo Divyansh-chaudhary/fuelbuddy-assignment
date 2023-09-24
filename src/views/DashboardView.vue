@@ -87,6 +87,7 @@ async function logout() {
           {{ store.user?.name }}
         </h5>
         <span class="text-sm text-gray-500">{{ store.user?.email }}</span>
+        <span class="text-sm text-gray-500">ID: {{ store.user?.uid }}</span>
       </div>
     </div>
   </main>
